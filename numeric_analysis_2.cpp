@@ -142,7 +142,7 @@ int sgn(double a)
 }
 
 //求Q、R和RQ
-void QR_Matrix()
+void QR_Matrix(double **a)
 {
 	int i , j , r;
 	double c , d , h , w[10] , p[10], u[10];
@@ -164,7 +164,12 @@ void QR_Matrix()
 				q[i][j] = 0;
 		}
 	}
-	initMat(R);zeroMat(R);
+	//initMat(R);
+	for(i = 0; i < 10; i++){
+		for(j = 0; j < 10; j++)
+			R[i][j] = a[i][j];
+	}
+	zeroMat(R);
 	for(r = 0; r < 9; r++){
 		d = 0;
 		for(i = r + 1; i < 10; i++)
@@ -429,7 +434,7 @@ int main()
 	hessenbergMat(a);//将矩阵拟上三角化
 	zeroMat(a);//满足精度要就的元素置0
 	printMat(a);//A(n-1)
-	QR_Matrix();//求Q、R和RQ
+	QR_Matrix(a);//求Q、R和RQ
 	QRmethod(a);
 	system("pause");
 	return 0;
